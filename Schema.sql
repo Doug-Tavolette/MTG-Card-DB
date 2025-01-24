@@ -18,6 +18,9 @@ CREATE TABLE character(
     vitality NUMERIC(4,1) DEFAULT 0 NOT NULL
 )
 
+CREATE TABLE ability(
+    character FOREIGN KEY (character_id) REFERENCES character
+)
 -- CREATE TABLE IF NOT EXISTS users(
 --     user_id SERIAL PRIMARY KEY
 -- )
