@@ -19,8 +19,12 @@ CREATE TABLE character(
 )
 
 CREATE TABLE ability(
-    character FOREIGN KEY (character_id) REFERENCES character
-)
+    ability_id INTEGER PRIMARY KEY, -- Assuming a primary key is needed
+    character_id INTEGER,          -- Column to reference `character.character_id`
+    ability_name VARCHAR(20) NOT NULL, -- Additional example column
+    FOREIGN KEY (character_id) REFERENCES character(character_id)
+);
+
 -- CREATE TABLE IF NOT EXISTS users(
 --     user_id SERIAL PRIMARY KEY
 -- )
