@@ -18,13 +18,25 @@ CREATE TABLE character(
     vitality NUMERIC(4,1) DEFAULT 0 NOT NULL
 )
 
-CREATE TABLE ability(
-    ability_id INTEGER PRIMARY KEY, -- Assuming a primary key is needed
-    character_id INTEGER,          -- Column to reference `character.character_id`
-    ability_name VARCHAR(20) NOT NULL, -- Additional example column
-    FOREIGN KEY (character_id) REFERENCES character(character_id)
+CREATE TABLE ability (
+    ability_id INTEGER PRIMARY KEY, -- Unique ID for the ability
+    character_id INTEGER NOT NULL, -- References the character who has this ability
+    ability_name VARCHAR(20) NOT NULL, -- Name of the ability
+    key_binding CHAR(1) NOT NULL, -- Single character for the keyboard key (e.g., 'Q', 'W', 'E', 'R', 'T')
+    damage INTEGER NOT NULL DEFAULT 0,
+    description VARCHAR(100) NOT NULL,
+    FOREIGN KEY (character_id) REFERENCES character(character_id),
+    UNIQUE (character_id, key_binding) -- Ensure each key_binding is unique per character
 );
 
+INSERT INTO character(character_name, character_id, base_hp, damage, armor, vitality) VALUES
+    ("Scarlet-Day", 1, 100, 0, 0, 0);
+
+INSERT INTO ability(ability_id, character_id, ability_name, key_binding) VALUES
+    (1, 1, "Daggers", 'LMB', 15, "Every 2 consecutive hits generate a combo point."),
+    (2, 1, "Swift Strike", "RMB", 40, "Consumes all combo points. Deals +50% damage for each combo point consumed this way."),
+    (3, 1, "Bomb", "E", 60, "Explodes after a delay. Stuns Scarlet if she it hit by it."),
+    (4, 1, "Cloak", "Shift", 0, "Become INTANGIBLE for 2 seconds. Next POWER or ATTACK triggered during this has +100% CRIT CHANCE");
 -- CREATE TABLE IF NOT EXISTS users(
 --     user_id SERIAL PRIMARY KEY
 -- )
