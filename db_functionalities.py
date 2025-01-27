@@ -16,3 +16,4 @@ def create_item(name, rarity, abilities_effected, description, quest_bonus):
 def return_character(name):
     sql = """SELECT * FROM character WHERE character.name = %s"""
     return exec_get_one(sql, (name,))
+
