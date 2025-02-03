@@ -13,7 +13,8 @@ def create_item(name, rarity, abilities_effected, description, quest_bonus):
     sql = """INSERT INTO item (name, rarity, abilities_effected, description, quest_bonus) VALUES (%s, %s, %s, %s, %s)"""
     exec_commit(sql, (name, rarity, abilities_effected, description, quest_bonus))
     
-def return_character(name):
-    sql = """SELECT * FROM character WHERE character.name = %s"""
+def return_character_id(name):
+    sql = """SELECT character_id FROM character WHERE character_name = %s"""
     return exec_get_one(sql, (name,))
+
 
